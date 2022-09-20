@@ -10,3 +10,6 @@
 [submodule "projects/roadside-365-cdk"]
 	path = projects/roadside-365-cdk
 	url = git@github.com:ac3cloud/roadside-365-cdk.git
+[submodule "projects/ttsu-aws"]
+	path = projects/ttsu-aws
+	url = git@bitbucket.org:ptv/ttsu-aws.git
