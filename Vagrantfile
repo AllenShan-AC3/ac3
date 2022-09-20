@@ -63,18 +63,36 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.synced_folder "~/.aws", "/home/vagrant/.aws"
-  config.vm.synced_folder "projects", "/home/vagrant/projects"
+  config.vm.synced_folder "shared", "/home/vagrant/shared"
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    
+    # Subscribe to RHEL
     sudo subscription-manager register --username allen.shan --password Ziwen910627 --auto-attach
+    
+    # Update package cache
     sudo dnf -y update
+    
+    # Install AWS CDK
     sudo dnf -y install python39 unzip
     sudo dnf module install -y nodejs:16
     sudo alternatives --set python3 /usr/bin/python3.9
     sudo npm install -g aws-cdk
+
+    # Install AWS CLI
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
     sudo ./aws/install
+
+    # Install VirutalEnv
     sudo pip3 install virtualenv
+
+    # Install Docker Engine
+    sudo dnf remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    sudo dnf update -y
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo systemctl start docker.service
+    sudo systemctl enable docker.service
   SHELL
 
   config.trigger.before [:destroy] do |trigger|

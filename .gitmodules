@@ -1,0 +1,12 @@
+[submodule "projects/movember"]
+	path = projects/movember
+	url = git@github.com:ac3cloud/movember.git
+[submodule "projects/roadside-cdk"]
+	path = projects/roadside-cdk
+	url = git@github.com:ac3cloud/roadside-cdk.git
+[submodule "projects/roadside-cicd"]
+	path = projects/roadside-cicd
+	url = git@github.com:ac3cloud/roadside-cicd.git
+[submodule "projects/roadside-365-cdk"]
+	path = projects/roadside-365-cdk
+	url = git@github.com:ac3cloud/roadside-365-cdk.git
